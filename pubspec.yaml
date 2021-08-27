@@ -1,0 +1,56 @@
+name: mega_features
+description: A new Flutter package project.
+version: 0.0.1
+authors:
+  - "Renan Santos"
+homepage: 'https://megaleios.com'
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mega_commons:
+    path: ../mega_commons
+  mega_commons_dependencies:
+    path: ../mega_commons_dependencies
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
