@@ -9,6 +9,7 @@ import 'package:mega_features/app/data/providers/login_provider.dart';
 
 class LoginController extends GetxController {
   final LoginProvider _loginProvider;
+  final String _homeRoute;
 
   late final Box accessTokenBox;
 
@@ -18,8 +19,11 @@ class LoginController extends GetxController {
       TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  LoginController({required LoginProvider loginProvider})
-      : _loginProvider = loginProvider;
+  LoginController({
+    required LoginProvider loginProvider,
+    required String homeRoute,
+  })  : _loginProvider = loginProvider,
+        _homeRoute = homeRoute;
 
   @override
   void onInit() {
@@ -49,7 +53,7 @@ class LoginController extends GetxController {
           AuthToken.cacheBoxKey,
           response,
         );
-        Get.offAllNamed('');
+        Get.offAllNamed(_homeRoute);
       } on MegaResponse catch (e) {
         Get.snackbar(
           'MegaExample',
