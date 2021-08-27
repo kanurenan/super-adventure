@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mega_commons/main.dart';
-import 'package:mega_commons/shared/helpers/custom_dio/mega_response.dart';
-import 'package:mega_commons/shared/models/auth_token.dart';
-import 'package:mega_commons/shared/models/profile_token.dart';
 import 'package:mega_commons_dependencies/main.dart';
-import 'package:mega_features/app/data/providers/login_provider.dart';
+import 'package:mega_features/mega_features.dart';
 
 class LoginController extends GetxController {
   final LoginProvider _loginProvider;
@@ -18,6 +15,10 @@ class LoginController extends GetxController {
   final TextEditingController confirmPasswordController =
       TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  final _isLoading = false.obs;
+
+  bool get isLoading => _isLoading.value;
 
   LoginController({
     required LoginProvider loginProvider,
@@ -40,6 +41,7 @@ class LoginController extends GetxController {
   void onClose() {}
 
   void save() async {
+    _isLoading.value = true;
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       final profileToken = ProfileToken(
@@ -60,6 +62,8 @@ class LoginController extends GetxController {
           e.message!,
           backgroundColor: Get.theme.errorColor.withOpacity(0.7),
         );
+      } finally {
+        _isLoading.value = false;
       }
     }
   }

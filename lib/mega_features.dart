@@ -1,7 +1,3 @@
-library mega_features;
-
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'app/data/providers/login_provider.dart';
+export 'app/modules/login/bindings/login_binding.dart';
+export 'app/modules/login/controllers/login_controller.dart';
