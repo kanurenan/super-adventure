@@ -57,10 +57,9 @@ class LoginController extends GetxController {
         );
         Get.offAllNamed(_homeRoute);
       } on MegaResponse catch (e) {
-        Get.snackbar(
-          'MegaExample',
+        MegaSnackbar.showErroSnackBar(
+          'Login',
           e.message!,
-          backgroundColor: Get.theme.errorColor.withOpacity(0.7),
         );
       } finally {
         _isLoading.value = false;
