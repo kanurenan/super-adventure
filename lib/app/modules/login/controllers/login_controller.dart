@@ -41,8 +41,8 @@ class LoginController extends GetxController {
   void onClose() {}
 
   void save() async {
-    _isLoading.value = true;
     if (formKey.currentState!.validate()) {
+      _isLoading.value = true;
       formKey.currentState!.save();
       final profileToken = ProfileToken(
         email: emailController.text,

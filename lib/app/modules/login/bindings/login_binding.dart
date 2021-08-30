@@ -12,7 +12,7 @@ class LoginBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<RestClientDio>(
-      () => RestClientDio.noAuth('http://api-template.megaleios.com/'),
+      () => RestClientDio.noAuth(RestClientDio.getBaseUrl().baseUrl),
     );
 
     Get.lazyPut<LoginProvider>(() => LoginProvider(restClientDio: Get.find()));
