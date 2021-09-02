@@ -48,22 +48,18 @@ class LoginController extends GetxController {
         email: emailController.text,
         password: passwordController.text,
       );
-      try {
-        final response =
-            await _loginProvider.authenticateUserByEmail(profileToken);
-        await accessTokenBox.put(
-          AuthToken.cacheBoxKey,
-          response,
-        );
-        Get.offAllNamed(_homeRoute);
-      } on MegaResponse catch (e) {
-        MegaSnackbar.showErroSnackBar(
-          'Login',
-          e.message!,
-        );
-      } finally {
-        _isLoading.value = false;
-      }
+      BlocUtils.load(
+        action: () async {
+          final response =
+              await _loginProvider.authenticateUserByEmail(profileToken);
+          await accessTokenBox.put(
+            AuthToken.cacheBoxKey,
+            response,
+          );
+          Get.offAllNamed(_homeRoute);
+        },
+      );
+      _isLoading.value = false;
     }
   }
 }
