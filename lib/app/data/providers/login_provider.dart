@@ -1,4 +1,4 @@
-import 'package:mega_commons/main.dart';
+import 'package:mega_commons/mega_commons.dart';
 
 class LoginProvider {
   final RestClientDio _restClientDio;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mega_commons/main.dart';
+import 'package:mega_commons/mega_commons.dart';
 import 'package:mega_commons_dependencies/main.dart';
 import 'package:mega_features/mega_features.dart';
 
