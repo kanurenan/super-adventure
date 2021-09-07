@@ -6,7 +6,7 @@ import 'package:mega_commons/main.dart';
 import 'package:mega_commons_dependencies/main.dart';
 
 class SplashScreenController extends GetxController {
-  final _bodyContainer = Rx<Widget>(Container());
+  final Rx<Widget> _bodyContainer = Rx<Widget>(Container());
 
   late final Box accessTokenBox;
 
@@ -25,22 +25,20 @@ class SplashScreenController extends GetxController {
   @override
   void onInit() {
     _bodyContainer.value = body ??
-        Container(
-          child: Text(
-            'SplashScreen',
-          ),
+        const Text(
+          'SplashScreen',
         );
     startTimer();
     super.onInit();
   }
 
-  startTimer() {
-    var _duration = Duration(milliseconds: 2000);
+  Timer startTimer() {
+    const Duration _duration = Duration(milliseconds: 2000);
     return Timer(_duration, navigate);
   }
 
   void navigate() {
-    final accessTokenData = AuthToken.fromCache();
+    final AuthToken? accessTokenData = AuthToken.fromCache();
     if (accessTokenData == null) {
       Get.offAllNamed(loginRoute!);
     } else {

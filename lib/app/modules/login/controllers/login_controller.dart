@@ -14,9 +14,9 @@ class LoginController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final _isLoading = false.obs;
+  final RxBool _isLoading = false.obs;
 
   bool get isLoading => _isLoading.value;
 
@@ -32,25 +32,17 @@ class LoginController extends GetxController {
     accessTokenBox = MegaDataCache.box<AuthToken>();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-
-  void save() async {
+  Future<void> save() async {
     if (formKey.currentState!.validate()) {
       _isLoading.value = true;
       formKey.currentState!.save();
-      final profileToken = ProfileToken(
+      final ProfileToken profileToken = ProfileToken(
         email: emailController.text,
         password: passwordController.text,
       );
       BlocUtils.load(
         action: () async {
-          final response =
+          final AuthToken response =
               await _loginProvider.authenticateUserByEmail(profileToken);
           await accessTokenBox.put(
             AuthToken.cacheBoxKey,

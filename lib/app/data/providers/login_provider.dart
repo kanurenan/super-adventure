@@ -1,5 +1,4 @@
-import 'package:mega_commons/shared/helpers/custom_dio/rest_client_dio.dart';
-import 'package:mega_commons/shared/models/models.dart';
+import 'package:mega_commons/main.dart';
 
 class LoginProvider {
   final RestClientDio _restClientDio;
@@ -8,7 +7,7 @@ class LoginProvider {
       : _restClientDio = restClientDio;
 
   Future<AuthToken> authenticateUserByEmail(ProfileToken profileToken) async {
-    final result = await _restClientDio.post(
+    final MegaResponse result = await _restClientDio.post(
       'api/v1/Profile/Token',
       data: {
         'email': profileToken.email,
