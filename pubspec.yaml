@@ -1,8 +1,6 @@
 name: mega_features
 description: A new Flutter package project.
 version: 0.0.1
-authors:
-  - "Renan Santos"
 homepage: 'https://megaleios.com'
 publish_to: none
 
