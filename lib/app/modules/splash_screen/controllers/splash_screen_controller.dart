@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mega_commons/mega_commons.dart';
-import 'package:mega_commons_dependencies/main.dart';
+import 'package:mega_commons_dependencies/mega_commons_dependencies.dart';
 
 class SplashScreenController extends GetxController {
   final Rx<Widget> _bodyContainer = Rx<Widget>(Container());

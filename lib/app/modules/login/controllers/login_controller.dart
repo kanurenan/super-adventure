@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mega_commons/mega_commons.dart';
-import 'package:mega_commons_dependencies/main.dart';
+import 'package:mega_commons_dependencies/mega_commons_dependencies.dart';
 import 'package:mega_features/mega_features.dart';
 
 class LoginController extends GetxController {
