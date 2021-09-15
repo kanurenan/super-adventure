@@ -8,8 +8,6 @@ import 'package:mega_commons_dependencies/main.dart';
 class SplashScreenController extends GetxController {
   final Rx<Widget> _bodyContainer = Rx<Widget>(Container());
 
-  late final Box accessTokenBox;
-
   final String? loginRoute;
   final String? homeRoute;
   final Widget? body;

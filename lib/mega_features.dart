@@ -1,4 +1,6 @@
 export 'app/data/providers/login_provider.dart';
+export 'app/modules/forgot_password/bindings/forgot_password_binding.dart';
+export 'app/modules/forgot_password/controllers/forgot_password_controller.dart';
 export 'app/modules/login/bindings/login_binding.dart';
 export 'app/modules/login/controllers/login_controller.dart';
 export 'app/modules/splash_screen/bindings/splash_screen_binding.dart';
