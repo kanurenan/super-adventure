@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mega_commons/mega_commons.dart';
-import 'package:mega_features/app/data/providers/change_password_provider.dart';
+import 'package:mega_features/mega_features.dart';
 
 class ChangePasswordController extends GetxController {
   final ChangePasswordProvider _changePasswordProvider;

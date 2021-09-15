@@ -1,4 +1,4 @@
-export 'app/data/providers/login_provider.dart';
+export 'app/data/providers/providers.dart';
 export 'app/modules/change_password/bindings/change_password_binding.dart';
 export 'app/modules/change_password/controllers/change_password_controller.dart';
 export 'app/modules/forgot_password/bindings/forgot_password_binding.dart';

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mega_commons/shared/helpers/custom_dio/rest_client_dio.dart';
-import 'package:mega_features/app/data/providers/forgot_password_provider.dart';
+import 'package:mega_features/mega_features.dart';
 
 import '../controllers/forgot_password_controller.dart';
 
