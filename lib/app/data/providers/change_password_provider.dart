@@ -9,10 +9,10 @@ class ChangePasswordProvider {
   Future<MegaResponse> onSubmitRequest(
       ChangePasswordParams changePasswordParams) async {
     final response = await _restClientDio.post(
-      '/api/v1/Profile/ChangePassword',
+      'api/v1/Profile/ChangePassword',
       data: {
-        'currentPassword': 'string',
-        'newPassword': 'string',
+        'currentPassword': changePasswordParams.currentPassword,
+        'newPassword': changePasswordParams.newPassword,
       },
     );
     return response;

@@ -8,7 +8,7 @@ class ChangePasswordController extends GetxController {
 
   final TextEditingController currentPassword = TextEditingController();
   final TextEditingController newPassword = TextEditingController();
-  final TextEditingController repeatPassword = TextEditingController();
+  final TextEditingController confirmPassword = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   ChangePasswordController(
@@ -24,12 +24,14 @@ class ChangePasswordController extends GetxController {
       _isLoading.value = true;
       BlocUtils.load(
         action: () async {
-          final megaResponse = await _changePasswordProvider
-              .onSubmitRequest(ChangePasswordParams(
-            currentPassword: currentPassword.text,
-            newPassword: newPassword.text,
-          ));
+          final megaResponse = await _changePasswordProvider.onSubmitRequest(
+            ChangePasswordParams(
+              currentPassword: currentPassword.text,
+              newPassword: newPassword.text,
+            ),
+          );
           MegaSnackbar.showSuccessSnackBar(megaResponse.message!);
+          Get.back();
         },
       );
       _isLoading.value = false;

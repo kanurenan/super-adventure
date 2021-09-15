@@ -27,6 +27,7 @@ class ForgotPasswordController extends GetxController {
             emailController.text,
           );
           MegaSnackbar.showSuccessSnackBar(megaResponse.message!);
+          Get.back();
         },
       );
       _isLoading.value = false;
