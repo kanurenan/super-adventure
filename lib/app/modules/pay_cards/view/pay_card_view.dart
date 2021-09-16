@@ -34,44 +34,125 @@ class PayCardView extends GetView<PayCardsController> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    CreditCardForm(
-                      formKey: controller.formKey,
-                      expiryDate: controller.expiryDate.value,
-                      cvvCode: controller.cvvCode.value,
-                      cardHolderName: controller.cardHolderName.value,
-                      cardNumber: controller.cardNumber.value,
-                      themeColor: Get.theme.primaryColor,
-                      onCreditCardModelChange:
-                          controller.onCreditCardModelChange,
-                      cardNumberDecoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Número',
-                      ),
-                      expiryDateDecoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Data de Expiração',
-                        hintText: 'XX/XX',
-                      ),
-                      cvvCodeDecoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'CVV',
-                        hintText: 'XXX',
-                      ),
-                      cardHolderDecoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Nome',
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      child: Form(
+                        key: controller.formKey,
+                        child: Column(
+                          children: [
+                            MegaTextFieldWidget(
+                              controller.numberController,
+                              labelText: 'Número',
+                              onEditingComplete: () {
+                                FocusScope.of(context)
+                                    .requestFocus(controller.expiryDateNode);
+                              },
+                              onChanged: (text) {
+                                controller.cardNumber.value = text!;
+                              },
+                              textInputAction: TextInputAction.next,
+                              autofillHints: const <String>[
+                                AutofillHints.creditCardNumber
+                              ],
+                              keyboardType: TextInputType.number,
+                              validator: (String? value) {
+                                if (value!.isEmpty || value.length < 16) {
+                                  return 'Por favor insira um número válido';
+                                }
+                                return null;
+                              },
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: MegaTextFieldWidget(
+                                    controller.expiryDateController,
+                                    labelText: 'Data',
+                                    focusNode: controller.expiryDateNode,
+                                    onEditingComplete: () {
+                                      FocusScope.of(context).requestFocus(
+                                          controller.cvvFocusNode);
+                                    },
+                                    keyboardType: TextInputType.number,
+                                    textInputAction: TextInputAction.next,
+                                    autofillHints: const <String>[
+                                      AutofillHints.creditCardExpirationDate
+                                    ],
+                                    validator: (String? value) {
+                                      if (value!.isEmpty) {
+                                        return 'Por favor insira uma data válida';
+                                      }
+                                      final DateTime now = DateTime.now();
+                                      final List<String> date =
+                                          value.split(RegExp('/'));
+                                      final int month = int.parse(date.first);
+                                      final int year =
+                                          int.parse('20${date.last}');
+                                      final DateTime cardDate =
+                                          DateTime(year, month);
+
+                                      if (cardDate.isBefore(now) ||
+                                          month > 12 ||
+                                          month == 0) {
+                                        return 'Por favor insira uma data válida';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 40),
+                                Expanded(
+                                  child: MegaTextFieldWidget(
+                                    controller.cvvController,
+                                    focusNode: controller.cvvFocusNode,
+                                    onEditingComplete: () {
+                                      FocusScope.of(context).requestFocus(
+                                          controller.cardHolderNode);
+                                    },
+                                    labelText: 'CVV',
+                                    keyboardType: TextInputType.number,
+                                    textInputAction: TextInputAction.next,
+                                    autofillHints: const <String>[
+                                      AutofillHints.creditCardSecurityCode
+                                    ],
+                                    onChanged: (text) {
+                                      controller.cvvCode.value = text!;
+                                    },
+                                    validator: (String? value) {
+                                      if (value!.isEmpty || value.length < 3) {
+                                        return 'Por favor insira um CVV válido';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                            MegaTextFieldWidget(
+                              controller.nameController,
+                              focusNode: controller.cardHolderNode,
+                              labelText: 'Nome',
+                              autofillHints: const <String>[
+                                AutofillHints.creditCardName
+                              ],
+                              validator: (String? value) {
+                                if (value!.split(' ').length < 2 ||
+                                    value.split(' ')[1].trim().isEmpty) {
+                                  return 'Informe um nome correto';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(16),
                       child: MegaBaseButton(
                         'Cadastrar Cartão',
-                        onButtonPress: () {
-                          if (controller.formKey.currentState!.validate()) {
-                            print('valid!');
-                          } else {
-                            print('invalid!');
-                          }
+                        onButtonPress: () async {
+                          controller.onSubmit();
                         },
                       ),
                     )
