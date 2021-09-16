@@ -18,15 +18,15 @@ class PayCardView extends GetView<PayCardsController> {
           children: [
             CreditCardWidget(
               onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
-              cardHolderName: 'Renan Santos',
-              cardNumber: '4111 1111 1111 1111',
-              cvvCode: '111',
+              cardHolderName: controller.cardHolderName.value,
+              cardNumber: controller.cardNumber.value,
+              cvvCode: controller.cvvCode.value,
               showBackView: controller.isCvvFocused.value,
-              expiryDate: '12/2021',
+              expiryDate: controller.expiryDate.value,
               height: 175,
-              isHolderNameVisible: true,
-              cardBgColor: Colors.red,
+              cardBgColor: Get.theme.primaryColor,
               textStyle: TextStyle(color: Get.theme.canvasColor),
+              textStyleCvv: TextStyle(color: Get.theme.errorColor),
               width: MediaQuery.of(context).size.width,
               animationDuration: const Duration(milliseconds: 1000),
             ),
@@ -36,17 +36,16 @@ class PayCardView extends GetView<PayCardsController> {
                   children: [
                     CreditCardForm(
                       formKey: controller.formKey,
-                      expiryDate: '',
-                      cvvCode: '',
-                      cardHolderName: '',
-                      themeColor: Colors.blue,
-                      cardNumber: '',
+                      expiryDate: controller.expiryDate.value,
+                      cvvCode: controller.cvvCode.value,
+                      cardHolderName: controller.cardHolderName.value,
+                      cardNumber: controller.cardNumber.value,
+                      themeColor: Get.theme.primaryColor,
                       onCreditCardModelChange:
                           controller.onCreditCardModelChange,
                       cardNumberDecoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Número',
-                        hintText: 'XXXX XXXX XXXX XXXX',
                       ),
                       expiryDateDecoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -63,29 +62,19 @@ class PayCardView extends GetView<PayCardsController> {
                         labelText: 'Nome',
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          'Glassmorphism',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Obx(
-                          () => Switch(
-                            value: controller.useGlassMorphism.value,
-                            inactiveTrackColor: Colors.grey,
-                            activeColor: Colors.white,
-                            activeTrackColor: Colors.green,
-                            onChanged: (bool value) {
-                              controller.useGlassMorphism.value = value;
-                            },
-                          ),
-                        )
-                      ],
-                    ),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      child: MegaBaseButton(
+                        'Cadastrar Cartão',
+                        onButtonPress: () {
+                          if (controller.formKey.currentState!.validate()) {
+                            print('valid!');
+                          } else {
+                            print('invalid!');
+                          }
+                        },
+                      ),
+                    )
                   ],
                 ),
               ),
