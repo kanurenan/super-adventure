@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:mega_commons/shared/helpers/custom_dio/rest_client_dio.dart';
-import 'package:mega_features/mega_features.dart';
 
+import '../../../../mega_features.dart';
 import '../controllers/login_controller.dart';
 
 class LoginBinding extends Bindings {

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mega_commons/mega_commons.dart';
 import 'package:mega_commons/shared/utils/bloc_utils.dart';
-import 'package:mega_features/mega_features.dart';
+
+import '../../../../mega_features.dart';
 
 class ForgotPasswordController extends GetxController {
   final ForgotPasswordProvider _forgotPasswordProvider;

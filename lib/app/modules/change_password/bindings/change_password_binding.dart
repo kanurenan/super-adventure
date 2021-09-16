@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:mega_commons/mega_commons.dart';
-import 'package:mega_features/mega_features.dart';
 
+import '../../../../mega_features.dart';
 import '../controllers/change_password_controller.dart';
 
 class ChangePasswordBinding extends Bindings {
